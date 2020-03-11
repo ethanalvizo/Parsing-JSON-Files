@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Q3 Solution</title>
+</head>
+
+<body>
+    <div id="myData"></div>
+    <script>
+        fetch('Q1_Solution.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+            
+        function appendData(data) {
+            var mainContainer = document.getElementById("myData");
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'Name of patient: ' + data[i].name[i].given + " " + data[i].name[i].family;
+                mainContainer.appendChild(div);                
+            }
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'Organization name: ' + data[i].managingOrganization[i].display;
+                mainContainer.appendChild(div);                
+            }
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'Gender: ' + data[i].gender;
+                mainContainer.appendChild(div);                
+            }
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'Number of conditions they have: ' + data[i].conditions.length;
+                mainContainer.appendChild(div);                
+            }
+            for (var i = 0; i < data.length; i++) {
+                var div = document.createElement("div");
+                div.innerHTML = 'List of all conditions:';
+                mainContainer.appendChild(div);                
+            }
+            for (var i = 0; i < data.length; i++) {
+                for(var j = 0; j < data[i].conditions.length; j++){
+                    var div = document.createElement("div");
+                    div.innerHTML = '- ' + data[i].conditions[j];
+                    mainContainer.appendChild(div);  
+                }              
+            }
+        }
+    </script>
+</body>
+
+</html>
